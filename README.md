@@ -14,7 +14,7 @@ Colorise tes logs, ajoute des tags, trace tes erreurs comme un(e) pro – tout �
 - Filtres de niveau (log en mode prod, silence mode…)
 - Support du log dans un fichier
 - Format JSON pour parsing facile
-- Système de timer pour mesurer la durée d’une opération (prochainement)
+- Système de timer pour mesurer la durée d’une opération
 - 0 dépendance externe, ultra léger
 
 ---
