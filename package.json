@@ -1,6 +1,6 @@
 {
   "name": "banana-logger-js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Logger stylé et flexible pour Node.js sans dépendance externe. Horodatage, couleurs, tags, tout ce qu'il faut pour des logs sexy.",
   "main": "./src/index.js",
   "type": "module",
