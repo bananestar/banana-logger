@@ -19,6 +19,7 @@ export default class BananaLogger {
     this._dateLocale = undefined;
     this._dateOptions = undefined;
     this._logFile = null; // fichier pour log desactivé par default
+    this._logAsJson = false;
   }
 
   tag(tag) {
@@ -46,10 +47,20 @@ export default class BananaLogger {
     return this;
   }
 
-  _writeToFile(msg) {
+  asJsonFileMode(enable = true) {
+    this._logAsJson = !!enable;
+    return this;
+  }
+
+  _writeToFile(msg, level, args) {
     if (!this._logFile) return;
     try {
-      appendFileSync(this._logFile, msg + '\n');
+      if (this._logAsJson) {
+        const obj = this._formatMsgObject(level, args);
+        appendFileSync(this._logFile, JSON.stringify(obj) + '\n');
+      } else {
+        appendFileSync(this._logFile, msg + '\n');
+      }
     } catch (e) {
       console.error(msg);
     }
@@ -85,13 +96,23 @@ export default class BananaLogger {
 
     return parts.join(' ');
   }
+  _formatMsgObject(level, args) {
+    return {
+      timestamp: new Date().toISOString(),
+      level: LEVELS[level].label,
+      tag: this._tag,
+      message: args.map((a) =>
+        a instanceof Error ? { error: a.message, stack: a.stack } : a
+      ),
+    };
+  }
 
   _log(level, ...args) {
     if (!this._shouldLog(level)) return;
     const color = LEVELS[level].color;
     const msg = this._formatMsg(level, args);
     console.log(color + msg + RESET);
-    if (this._logFile) this._writeToFile(msg);
+    if (this._logFile) this._writeToFile(msg, level, args);
     this._tag = null;
   }
 
