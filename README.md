@@ -1,4 +1,4 @@
-# 🍌 BananaLogger
+# 🍌 BananaLogger-js
 
 &#x20;&#x20;
 
