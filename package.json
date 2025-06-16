@@ -1,0 +1,34 @@
+{
+  "name": "banana-logger",
+  "version": "1.0.0",
+  "description": "Logger stylé et flexible pour Node.js sans dépendance externe. Horodatage, couleurs, tags, tout ce qu'il faut pour des logs sexy.",
+  "main": "./src/index.js",
+  "type": "module",
+  "directories": {
+    "test": "node ./test/index.test.js",
+    "start": "node ./src/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "logger",
+    "log",
+    "banana",
+    "console",
+    "nodejs",
+    "color",
+    "timestamp",
+    "utility"
+  ],
+  "author": "Simon Vander Linden",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bananestar/banana-logger.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bananestar/banana-logger/issues"
+  },
+  "homepage": "https://github.com/bananestar/banana-logger#readme"
+}
