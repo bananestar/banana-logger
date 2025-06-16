@@ -1,3 +1,6 @@
+import { appendFileSync, existsSync, mkdirSync } from 'fs';
+import { dirname } from 'path';
+
 const LEVELS = {
   info: { color: '\x1b[36m', label: 'INFO' }, // cyan
   warn: { color: '\x1b[33m', label: 'WARN' }, //yellow
@@ -15,6 +18,7 @@ export default class BananaLogger {
     this._levelsOrder = ['debug', 'info', 'warn', 'error'];
     this._dateLocale = undefined;
     this._dateOptions = undefined;
+    this._logFile = null; // fichier pour log desactivé par default
   }
 
   tag(tag) {
@@ -33,6 +37,22 @@ export default class BananaLogger {
     this._dateLocale = locale;
     this._dateOptions = options;
     return this;
+  }
+
+  toFile(path) {
+    this._logFile = path;
+    const dir = dirname(path);
+    if (!existsSync(dir)) mkdirSync(dir, { recursive: true });
+    return this;
+  }
+
+  _writeToFile(msg) {
+    if (!this._logFile) return;
+    try {
+      appendFileSync(this._logFile, msg + '\n');
+    } catch (e) {
+      console.error(msg);
+    }
   }
 
   _shouldLog(level) {
@@ -69,7 +89,9 @@ export default class BananaLogger {
   _log(level, ...args) {
     if (!this._shouldLog(level)) return;
     const color = LEVELS[level].color;
-    console.log(color + this._formatMsg(level, args) + RESET);
+    const msg = this._formatMsg(level, args);
+    console.log(color + msg + RESET);
+    if (this._logFile) this._writeToFile(msg);
     this._tag = null;
   }
 
