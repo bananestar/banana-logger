@@ -2,7 +2,7 @@
 
 &#x20;&#x20;
 
-BananaLogger is a stylish, zero-dependency logging utility for Node.js – with colors, tags, timestamps, timers, and advanced file/JSON support. **Fun to use, readable for humans, simple to parse for machines.**
+BananaLogger-js is a stylish, zero-dependency logging utility for Node.js – with colors, tags, timestamps, timers, and advanced file/JSON support. **Fun to use, readable for humans, simple to parse for machines.**
 
 ---
 
@@ -21,7 +21,7 @@ BananaLogger is a stylish, zero-dependency logging utility for Node.js – with 
 ## 📦 Installation
 
 ```bash
-npm install banana-logger
+npm install banana-logger-js
 ```
 
 _or simply copy **`src/index.js`** into your project for full portability._
